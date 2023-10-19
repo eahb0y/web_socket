@@ -24,14 +24,14 @@ class _SocketTestState extends State<SocketTest> {
             builder: (context, massage) {
               if (true != receiverMassages.contains(massage.data) &&
                   massage.hasData) receiverMassages.add(massage.data);
-              return Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 12,
-                  vertical: 10,
-                ),
-                child: massage.data == null
-                    ? const Center(child: CircularProgressIndicator())
-                    : ListView.separated(
+              return massage.data == null
+                  ? const Center(child: CircularProgressIndicator())
+                  : Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 10,
+                    ),
+                    child: ListView.separated(
                         reverse: true,
                         itemBuilder: (_, index) {
                           return Row(
@@ -61,7 +61,7 @@ class _SocketTestState extends State<SocketTest> {
                         separatorBuilder: (_, __) => const SizedBox(height: 15),
                         itemCount: receiverMassages.length,
                       ),
-              );
+                  );
             },
             stream: channel.stream,
           ),
